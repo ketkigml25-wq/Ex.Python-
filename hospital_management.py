@@ -21,6 +21,9 @@ def add_patient():
 
     name = input("Enter Patient Name: ")
     age = input("Enter Age: ")
+    if not age.isdigit():
+        print("Please enter a valid age.")
+        return
     disease = input("Enter Disease/Problem: ")
 
     patients[patient_id] = {
