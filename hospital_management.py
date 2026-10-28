@@ -21,9 +21,6 @@ def add_patient():
 
     name = input("Enter Patient Name: ")
     age = input("Enter Age: ")
-    if not age.isdigit():
-        print("Please enter a valid age.")
-        return
     disease = input("Enter Disease/Problem: ")
 
     patients[patient_id] = {
@@ -220,7 +217,15 @@ def add_resource():
         return
 
     name = input("Enter Resource Name: ")
-    quantity = int(input("Enter Quantity: "))
+    
+    try:
+        quantity = int(input("Enter Quantity: "))
+        if quantity < 0:
+            print("Quantity cannot be negative.")
+            return
+    except ValueError:
+        print("Please enter a valid number.")
+        return
 
     resources[resource_id] = {
         "name": name,
@@ -230,12 +235,18 @@ def add_resource():
     print("Medical resource added successfully.")
 
 
+
 def use_resource():
     resource_id = input("Enter Resource ID: ")
-    quantity = int(input("Enter Quantity to Use: "))
 
     if resource_id not in resources:
         print("Resource not found.")
+        return
+
+    try:
+        quantity = int(input("Enter Quantity to Use: "))
+    except ValueError:
+        print("Please enter a valid number.")
         return
 
     if quantity <= 0:
@@ -247,6 +258,7 @@ def use_resource():
         print("Resource allocated successfully.")
     else:
         print("Insufficient resource available.")
+
 
 
 def view_resources():
